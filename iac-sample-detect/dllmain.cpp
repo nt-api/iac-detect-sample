@@ -1,10 +1,10 @@
 #include "pch.h"
+#include "IgacAPI.h"
 #include <iostream>
 
-bool sample_detect()
+igacApi::IAC_DETECTION_RESULT sample_detect()
 {
-	std::cout << "Test" << '\n';
-	return true; // return true if detected else return false
+    return true; // detected
 }
 
 BOOL APIENTRY DllMain( HMODULE hModule,
@@ -16,8 +16,7 @@ BOOL APIENTRY DllMain( HMODULE hModule,
     {
     case DLL_PROCESS_ATTACH:
 		// register detection functions here
-		// example: igacApi::iac_register_detect(fp);
-		igacApi::iac_register_detect(sample_detect);
+		igacApi::iac_register_detect("test", "test description", 0, sample_detect); // only log (severity 0)
         break;
     case DLL_THREAD_ATTACH:
     case DLL_THREAD_DETACH:
